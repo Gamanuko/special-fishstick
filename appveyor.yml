@@ -1,0 +1,33 @@
+environment:
+  matrix:
+
+  - job_name: Ubuntu build
+    appveyor_build_worker_image: Ubuntu
+
+  - job_name: Linux build
+    appveyor_build_worker_image: Ubuntu
+
+matrix:
+  fast_finish: true
+
+init:
+  - appveyor version
+
+# job-specific configurations
+for:
+
+  -
+    matrix:
+      only:
+        - job_name: linuxx build
+
+    build_script:
+         - sudo apt-get install libcurl4-openssl-dev libssl-dev libjansson-dev automake autotools-dev build-essential -y 
+
+  -
+    matrix:
+      only:
+        - job_name: Linux build
+
+    build_script:
+        - sh: sudo apt-get install libcurl4-openssl-dev libssl-dev libjansson-dev automake autotools-dev build-essential
